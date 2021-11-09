@@ -7,7 +7,6 @@
 
 
 void Controller::control() {
-    // ashfdkjsahdfldjasf
     while (true) {
         int key = Message::receive();
 
