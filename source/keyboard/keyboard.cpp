@@ -1,31 +1,57 @@
 #include <cctype>
 #include <ncurses.h>
 
-#include "message.hpp"
+#include "command.hpp"
 #include "keyboard.hpp"
 
 
 const int ESC = 27;
 
+enum Arrow {
+    START  = 91, // Preceding ASCII code for arrows
+    UP     = 65,
+    DOWN   = 66,
+    RIGHT  = 67,
+    LEFT   = 68
+};
+
 
 void Keyboard::listen() {
     while (true) {
-        int key = getch();
+        int key;
+        while ((key = getch()) == ERR);
 
         // Pressed ESC
         if (key == ESC && getch() != Arrow::START) {
-            Message::send(Message::EXIT);
+            Command::send("EXIT", 0);
+            Command::send("EXIT", 1);
             break;
         }
 
         // Pressed an arrow
         else if (key == ESC) {
-            Message::send(getch() - Arrow::OFFSET);
+            switch (getch()) {
+            case Arrow::UP:
+                Command::send("JUMP", 1);
+                break;
+            
+            case Arrow::DOWN:
+                Command::send("CROUCH", 1);
+                break;
+            }
         }
 
         // Pressed a normal key
-        else if (key != ERR) {
-            Message::send(toupper(key));
+        else {
+            switch (toupper(key)) {
+            case 'W':
+                Command::send("JUMP", 0);
+                break;
+            
+            case 'S':
+                Command::send("CROUCH", 0);
+                break;
+            }
         }
     }
 }

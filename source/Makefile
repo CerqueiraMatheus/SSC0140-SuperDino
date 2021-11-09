@@ -1,9 +1,9 @@
 CC = g++
 BIN = main
 LIB = -lpthread -lncurses
-DIR = -I terminal -I keyboard -I message -I controller
+DIR = -I terminal -I keyboard -I command -I player -I game
 FLAG = -Wall -Werror
-SOURCE = main.cpp terminal/*.cpp keyboard/*.cpp message/*.cpp controller/*.cpp
+SOURCE = main.cpp terminal/*.cpp keyboard/*.cpp command/*.cpp player/*.cpp game/*.cpp
 
 all:
 	@$(CC) $(SOURCE) -o $(BIN) $(LIB) $(DIR) $(FLAG)
