@@ -10,10 +10,10 @@ using namespace std;
 using namespace chrono;
 
 
-const int FPS = 60;
-
-
 namespace Game {
+    const int FPS = 60;
+    void update(Player& player);
+
     // Região crítica
     mutex semaphore;
     bool run = true;
@@ -37,23 +37,6 @@ void Game::exit() {
 }
 
 
-void update(Player& player) {
-    switch (Command::receive()) {
-    case Command::JUMP:
-        player.jump();
-        break;
-    
-    case Command::DUCK:
-        player.crouch();
-        break;
-    
-    case Command::RESET:
-        break;
-    }
-
-    player.move();
-}
-
 void Game::loop() {
     Player player;
     auto frame = system_clock::now();
@@ -68,4 +51,21 @@ void Game::loop() {
         // Espera até o próximo frame
         this_thread::sleep_until(frame);
     }
+}
+
+void Game::update(Player& player) {
+    switch (Command::receive()) {
+    case Command::JUMP:
+        player.jump();
+        break;
+    
+    case Command::DUCK:
+        player.crouch();
+        break;
+    
+    case Command::RESET:
+        break;
+    }
+
+    player.move();
 }

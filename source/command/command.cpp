@@ -9,10 +9,9 @@
 using namespace std;
 
 
-const int ESC = 27;
-
-
 namespace Command {
+    const int ESC = 27;
+
     // Região crítica
     mutex semaphore;
     queue<int> commands;
