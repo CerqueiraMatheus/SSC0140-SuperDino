@@ -1,10 +1,16 @@
 #include <mutex>
+#include <thread>
+#include <chrono>
 
 #include "game.hpp"
 #include "player.hpp"
 #include "command.hpp"
 
 using namespace std;
+using namespace chrono;
+
+
+const int FPS = 60;
 
 
 namespace Game {
@@ -30,20 +36,36 @@ void Game::exit() {
     semaphore.unlock();
 }
 
+
+void update(Player& player) {
+    switch (Command::receive()) {
+    case Command::JUMP:
+        player.jump();
+        break;
+    
+    case Command::DUCK:
+        player.crouch();
+        break;
+    
+    case Command::RESET:
+        break;
+    }
+
+    player.move();
+}
+
 void Game::loop() {
     Player player;
+    auto frame = system_clock::now();
 
     while (running()) {
-        switch (Command::receive()) {
-            case Command::JUMP:
-                player.jump();
-                break;
-        
-            case Command::DUCK:
-                player.crouch();
-                break;
-        }
-        
-        player.move();
+        // Calcula o próximo frame
+        frame += milliseconds(1000 / FPS);
+
+        update(player);
+        // display()
+
+        // Espera até o próximo frame
+        this_thread::sleep_until(frame);
     }
 }
