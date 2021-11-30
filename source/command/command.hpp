@@ -1,12 +1,17 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-#include <string>
-using namespace std;
-
 namespace Command {
-    void send(string command, int target);
-    string receive(int receiver);
+    enum {
+        NONE  = -1,
+        JUMP  =  0,
+        DUCK  =  1,
+        RESET =  2
+    };
+
+    void send(int command);
+    int receive();
+    void listen();
 }
 
 #endif // COMMAND_HPP

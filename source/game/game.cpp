@@ -34,13 +34,14 @@ void Game::loop() {
     Player player;
 
     while (running()) {
-        string command = Command::receive(0);
-
-        if (command == "JUMP") {
-            player.jump();
-        }
-        else if (command == "CROUCH") {
-            player.crouch();
+        switch (Command::receive()) {
+            case Command::JUMP:
+                player.jump();
+                break;
+        
+            case Command::DUCK:
+                player.crouch();
+                break;
         }
         
         player.move();
