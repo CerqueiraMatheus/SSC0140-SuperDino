@@ -8,13 +8,15 @@ private:
     int width;
     int height;
     int velocity;
-    bool ground();
+
+private:
+    bool grounded();
 
 public:
     Player();
     void move();
     void jump();
-    void crouch();
+    void duck();
 };
 
 #endif // PLAYER_HPP

@@ -45,6 +45,7 @@ int Command::receive() {
 
 void Command::listen() {
     while (Game::running()) {
+        // Detecta teclas pressionadas
         switch (getch()) {
         case ESC:
             Game::exit();

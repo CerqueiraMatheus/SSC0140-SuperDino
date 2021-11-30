@@ -1,8 +1,7 @@
-#include "ncurses.h" // Temporary
+#include "game.hpp"
 #include "player.hpp"
 
-
-const int GRAVITY = 1;
+#include "ncurses.h" // Temporario
 
 
 Player::Player() {
@@ -14,29 +13,32 @@ Player::Player() {
 }
 
 void Player::move() {
+    // Atualiza a velocidade do pulo/queda
     y += velocity;
-    velocity -= GRAVITY;
+    velocity -= Game::GRAVITY;
     
-    if (ground()) {
+    // Checa pelo contato com o chão
+    if (grounded()) {
         y = 0;
         velocity = 0;
     }
 }
 
 void Player::jump() {
-    printw("Player jump!\n"); // Temporary
+    printw("Jump!\n"); // Temporario
 
-    if (ground()) {
+    // Pula se estiver no chão
+    if (grounded()) {
         velocity = 10;
     }
 }
 
-void Player::crouch() {
-    printw("Player crouch!\n"); // Temporary
+void Player::duck() {
+    printw("Duck!\n"); // Temporario
 
     // TODO
 }
 
-bool Player::ground() {
+bool Player::grounded() {
     return y <= 0;
 }

@@ -54,13 +54,14 @@ void Game::loop() {
 }
 
 void Game::update(Player& player) {
+    // Executa o comando
     switch (Command::receive()) {
     case Command::JUMP:
         player.jump();
         break;
     
     case Command::DUCK:
-        player.crouch();
+        player.duck();
         break;
     
     case Command::RESET:
