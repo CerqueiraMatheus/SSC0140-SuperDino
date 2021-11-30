@@ -8,26 +8,35 @@ using namespace std;
 
 
 namespace Game {
+    // Região crítica
     mutex semaphore;
-    int current = 0;
+    bool run = true;
 }
 
 
-void Game::run() {
-    // Set id
+bool Game::running() {
+    // Checa pela execução do jogo
     semaphore.lock();
-    int id = current++;
+    bool temporary = run;
     semaphore.unlock();
-    
+
+    return temporary;
+}
+
+void Game::exit() {
+    // Finaliza a execução do jogo
+    semaphore.lock();
+    run = false;
+    semaphore.unlock();
+}
+
+void Game::loop() {
     Player player;
 
-    while (true) {
-        string command = Command::receive(id);
+    while (running()) {
+        string command = Command::receive(0);
 
-        if (command == "EXIT") {
-            break;
-        }
-        else if (command == "JUMP") {
+        if (command == "JUMP") {
             player.jump();
         }
         else if (command == "CROUCH") {
@@ -37,5 +46,3 @@ void Game::run() {
         player.move();
     }
 }
-
-

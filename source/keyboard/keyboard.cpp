@@ -1,6 +1,7 @@
 #include <cctype>
 #include <ncurses.h>
 
+#include "game.hpp"
 #include "command.hpp"
 #include "keyboard.hpp"
 
@@ -17,14 +18,13 @@ enum Arrow {
 
 
 void Keyboard::listen() {
-    while (true) {
+    while (Game::running()) {
         int key;
         while ((key = getch()) == ERR);
 
         // Pressed ESC
         if (key == ESC && getch() != Arrow::START) {
-            Command::send("EXIT", 0);
-            Command::send("EXIT", 1);
+            Game::exit();
             break;
         }
 

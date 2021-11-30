@@ -9,7 +9,7 @@ using namespace std;
 
 namespace Command {
     mutex semaphore;
-    queue<string> commands[Game::NUMBER];
+    queue<string> commands[2];
 }
 
 

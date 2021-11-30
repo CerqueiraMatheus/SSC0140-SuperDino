@@ -2,8 +2,9 @@
 #define GAME_HPP
 
 namespace Game {
-    const int NUMBER = 2;
-    void run();
+    bool running();
+    void exit();
+    void loop();
 }
 
 #endif // GAME_HPP
