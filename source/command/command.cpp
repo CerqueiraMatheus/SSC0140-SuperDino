@@ -11,14 +11,6 @@ using namespace std;
 
 const int ESC = 27;
 
-enum Arrow {
-    START  = 91, // Preceding ASCII code for arrows
-    UP     = 65,
-    DOWN   = 66,
-    RIGHT  = 67,
-    LEFT   = 68
-};
-
 
 namespace Command {
     // Região crítica
@@ -43,7 +35,7 @@ int Command::receive() {
         return NONE;
     }
 
-    // Remove comando da fila
+    // Remove o comando da fila
     int command = commands.front();
     commands.pop();
 
@@ -54,26 +46,22 @@ int Command::receive() {
 
 void Command::listen() {
     while (Game::running()) {
-        int key;
-        while ((key = getch()) == ERR);
-
-        // Pressed ESC
-        if (key == ESC && getch() != Arrow::START) {
+        switch (getch()) {
+        case ESC:
             Game::exit();
             break;
-        }
-
-        // Pressed an arrow
-        else if (key == ESC) {
-            switch (getch()) {
-            case Arrow::UP:
-                send(JUMP);
-                break;
-            
-            case Arrow::DOWN:
-                send(DUCK);
-                break;
-            }
+        
+        case KEY_UP:
+            send(JUMP);
+            break;
+        
+        case KEY_DOWN:
+            send(DUCK);
+            break;
+        
+        case ' ':
+            send(RESET);
+            break;
         }
     }
 }

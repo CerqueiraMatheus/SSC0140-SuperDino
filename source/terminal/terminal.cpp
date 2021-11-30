@@ -4,15 +4,16 @@
 
 
 Terminal::Terminal() {
-    // Ncurses setup
+    // Inicialização da ncurses
     initscr();
-    cbreak();
     noecho();
-    scrollok(stdscr, true);
+    curs_set(false);
+    keypad(stdscr, true);
     nodelay(stdscr, true);
+    scrollok(stdscr, true);
 }
 
 Terminal::~Terminal() {
-    // Ncurses teardown
+    // Finalização da ncurses
     endwin();
 }

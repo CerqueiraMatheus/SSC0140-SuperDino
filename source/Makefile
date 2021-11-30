@@ -1,12 +1,12 @@
-CC = g++
-BIN = main
-LIB = -lpthread -lncurses
-DIR = -I terminal -I command -I player -I game
+CC   = g++
+BIN  = main
+LIB  = -lpthread -lncurses
+DIR  = -I command  -I game -I player -I terminal
 FLAG = -Wall -Werror
-SOURCE = main.cpp terminal/*.cpp command/*.cpp player/*.cpp game/*.cpp
+SRC  = main.cpp command/*.cpp game/*.cpp player/*.cpp terminal/*.cpp
 
 all:
-	@$(CC) $(SOURCE) -o $(BIN) $(LIB) $(DIR) $(FLAG)
+	@$(CC) $(SRC) -o $(BIN) $(LIB) $(DIR) $(FLAG)
 
 run:
 	@./$(BIN)
