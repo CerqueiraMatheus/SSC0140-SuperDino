@@ -11,6 +11,7 @@ using namespace std;
 
 namespace Command {
     const int ESC = 27;
+    void send(int command);
 
     // Região crítica
     mutex semaphore;

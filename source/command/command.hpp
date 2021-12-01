@@ -9,7 +9,6 @@ namespace Command {
         RESET =  2
     };
 
-    void send(int command);
     int receive();
     void listen();
 }
