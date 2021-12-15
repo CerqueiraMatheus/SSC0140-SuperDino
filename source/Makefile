@@ -1,5 +1,5 @@
 CC   = g++
-BIN  = main
+BIN  = main.out
 LIB  = -lpthread -lncurses
 DIR  = -I command  -I game -I player -I terminal -I graphics
 FLAG = -Wall -Werror
