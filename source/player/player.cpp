@@ -9,8 +9,8 @@
 Player::Player() {
     x = 75;
     y = GROUND;
-    width = 15;
-    height = 15;
+    width = 14;
+    height = 5;
     velocity = 0;
 }
 
