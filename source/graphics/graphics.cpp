@@ -16,6 +16,11 @@ void Graphics::draw_player(int x, int y, char c) {
     memset(floor, '-', w);
     mvprintw(21, 0, floor);
 
+    // mvprintw(y - 3, x, "          __   ");
+    // mvprintw(y - 2, x, "`__.--¨ ¨ @-@  ");
+    // mvprintw(y - 1, x, " '-.__ )_,\\_/)");
+    // mvprintw(y    , x, "     / \\      ");
+
     mvprintw(y - 5, x, "          __"   );
     mvprintw(y - 4, x, "         /@-@"  );
     mvprintw(y - 3, x, "        / \\_/)");
