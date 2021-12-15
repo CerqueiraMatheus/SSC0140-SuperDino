@@ -34,7 +34,7 @@ void Player::jump() {
 
 void Player::duck() {
     if (!grounded()) {
-        velocity = -4;
+        velocity -= .9;
     }
 }
 
