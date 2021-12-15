@@ -28,13 +28,13 @@ void Player::move() {
 void Player::jump() {
     // Pula se estiver no chão
     if (grounded()) {
-        velocity = 4;
+        velocity = 1.5;
     }
 }
 
 void Player::duck() {
     if (!grounded()) {
-        velocity = -8;
+        velocity = -4;
     }
 }
 

@@ -12,7 +12,7 @@ using namespace std;
 using namespace chrono;
 
 namespace Game {
-const int FPS = 15;
+const int FPS = 60;
 void update(Player& player);
 
 // Região crítica

@@ -8,7 +8,7 @@ void Graphics::draw_player(int x, int y, char c) {
     clear();
 
     // Bordas 
-    box(stdscr, 20, 0);
+    //box(stdscr, 20, 0);
     
     // Player
     mvaddch(y, x, c);

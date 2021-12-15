@@ -5,15 +5,15 @@ class Player {
    private:
     int width;
     int height;
-    int velocity;
+    float velocity;
     const int GROUND = 20;
 
    private:
     bool grounded();
 
    public:
-    int x;
-    int y;
+    float x;
+    float y;
     Player();
     void move();
     void jump();
