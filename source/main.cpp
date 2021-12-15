@@ -1,11 +1,10 @@
 #include <thread>
 
-#include "game.hpp"
 #include "command.hpp"
+#include "game.hpp"
 #include "terminal.hpp"
 
 using namespace std;
-
 
 int main() {
     // Configuração do terminal
@@ -16,6 +15,6 @@ int main() {
 
     command.join();
     game.join();
-    
+
     return 0;
 }

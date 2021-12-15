@@ -2,15 +2,10 @@
 #define COMMAND_HPP
 
 namespace Command {
-    enum {
-        NONE  = -1,
-        JUMP  =  0,
-        DUCK  =  1,
-        RESET =  2
-    };
+enum { NONE = -1, JUMP = 0, DUCK = 1, RESET = 2 };
 
-    int receive();
-    void listen();
-}
+int receive();
+void listen();
+}  // namespace Command
 
-#endif // COMMAND_HPP
+#endif  // COMMAND_HPP

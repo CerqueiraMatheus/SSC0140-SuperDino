@@ -2,9 +2,9 @@
 #define TERMINAL_HPP
 
 class Terminal {
-public:
+   public:
     Terminal();
     ~Terminal();
 };
 
-#endif // TERMINAL_HPP
+#endif  // TERMINAL_HPP

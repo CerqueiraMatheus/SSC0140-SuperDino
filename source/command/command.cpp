@@ -1,23 +1,23 @@
-#include <queue>
-#include <mutex>
-#include <cctype>
+#include "command.hpp"
+
 #include <ncurses.h>
 
+#include <cctype>
+#include <mutex>
+#include <queue>
+
 #include "game.hpp"
-#include "command.hpp"
 
 using namespace std;
 
-
 namespace Command {
-    const int ESC = 27;
-    void send(int command);
+const int ESC = 27;
+void send(int command);
 
-    // Região crítica
-    mutex semaphore;
-    queue<int> commands;
-}
-
+// Região crítica
+mutex semaphore;
+queue<int> commands;
+}  // namespace Command
 
 void Command::send(int command) {
     // Adiciona o comando à fila
@@ -26,7 +26,7 @@ void Command::send(int command) {
     semaphore.unlock();
 }
 
-int Command::receive() {    
+int Command::receive() {
     semaphore.lock();
 
     // Checa pela existência de comandos
@@ -43,26 +43,25 @@ int Command::receive() {
     return command;
 }
 
-
 void Command::listen() {
     while (Game::running()) {
         // Detecta teclas pressionadas
         switch (getch()) {
-        case ESC:
-            Game::exit();
-            break;
-        
-        case KEY_UP:
-            send(JUMP);
-            break;
-        
-        case KEY_DOWN:
-            send(DUCK);
-            break;
-        
-        case ' ':
-            send(RESET);
-            break;
+            case ESC:
+                Game::exit();
+                break;
+
+            case KEY_UP:
+                send(JUMP);
+                break;
+
+            case KEY_DOWN:
+                send(DUCK);
+                break;
+
+            case ' ':
+                send(RESET);
+                break;
         }
     }
 }
