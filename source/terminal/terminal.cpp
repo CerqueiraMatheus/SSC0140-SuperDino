@@ -1,6 +1,7 @@
+#include <ncurses.h>
+
 #include "terminal.hpp"
 
-#include <ncurses.h>
 
 Terminal::Terminal() {
     // Inicialização da ncurses

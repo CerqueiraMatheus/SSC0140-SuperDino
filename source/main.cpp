@@ -1,10 +1,11 @@
 #include <thread>
 
-#include "command.hpp"
 #include "game.hpp"
+#include "command.hpp"
 #include "terminal.hpp"
 
 using namespace std;
+
 
 int main() {
     // Configuração do terminal

@@ -1,8 +1,10 @@
 #ifndef GRAPHICS_HPP
 #define GRAPHICS_HPP
 
+#include "player.hpp"
+
 namespace Graphics {
-void draw_player(int x, int y, char c);
+    void draw(Player& player);
 }
 
-#endif
+#endif // GRAPHICS_HPP

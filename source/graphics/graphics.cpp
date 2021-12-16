@@ -1,32 +1,44 @@
+#include <string>
+#include <ncurses.h>
+
+#include "game.hpp"
+#include "player.hpp"
 #include "graphics.hpp"
 
-#include <ncurses.h>
-#include <unistd.h>
-#include <string.h>
+using namespace std;
 
-void Graphics::draw_player(int x, int y, char c) {
-    // Limpa
+
+namespace Graphics {
+    void background();
+}
+
+
+void Graphics::draw(Player& player) {
+    // Limpa a tela
     clear();
 
-    int h, w;
-    getmaxyx(stdscr, h, w);
-    w += h;
-    w -= h;
-    char floor[w];
-    memset(floor, '-', w);
-    mvprintw(21, 0, floor);
+    background();
+    player.draw();
 
-    // mvprintw(y - 3, x, "          __   ");
-    // mvprintw(y - 2, x, "`__.--¨ ¨ @-@  ");
-    // mvprintw(y - 1, x, " '-.__ )_,\\_/)");
-    // mvprintw(y    , x, "     / \\      ");
-
-    mvprintw(y - 5, x, "          __"   );
-    mvprintw(y - 4, x, "         /@-@"  );
-    mvprintw(y - 3, x, "        / \\_/)");
-    mvprintw(y - 2, x, ",___.--` /"     );
-    mvprintw(y - 1, x, " '-.__ )/'"     );
-    mvprintw(y    , x, "     / \\"      );
-
+    // Atualiza a tela
     refresh();
+}
+
+
+void Graphics::background() {
+    // Desenha o chão
+    int width = getmaxx(stdscr);
+    string ground(width - 1, '-');
+    mvprintw(Game::GROUND, 0, ground.c_str());
+
+    // Desenha o sol
+    mvprintw(1, width - 30, "      ;   :   ;"      );
+	mvprintw(2, width - 30, "   .   \\_,!,_/   ,"  );
+	mvprintw(3, width - 30, "    `.,'     `.,'"    );
+	mvprintw(4, width - 30, "     /         \\"    );
+	mvprintw(5, width - 30, "~ -- |         | -- ~");
+	mvprintw(6, width - 30, "     \\         /"    );
+	mvprintw(7, width - 30, "    ,'`._   _.'`."    );
+	mvprintw(8, width - 30, "   '   / `!` \\   `"  );
+	mvprintw(9, width - 30, "      ;   :   ;"      );
 }

@@ -3,21 +3,23 @@
 
 class Player {
    private:
+    float x;
+    float y;
+    int timer;
     int width;
     int height;
     float velocity;
-    const int GROUND = 20;
 
    private:
-    bool grounded();
+    bool jumping();
+    bool ducking();
 
    public:
-    float x;
-    float y;
     Player();
     void move();
     void jump();
     void duck();
+    void draw();
 };
 
 #endif  // PLAYER_HPP

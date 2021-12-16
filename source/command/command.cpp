@@ -1,23 +1,22 @@
-#include "command.hpp"
-
-#include <ncurses.h>
-
-#include <cctype>
 #include <mutex>
 #include <queue>
+#include <ncurses.h>
 
 #include "game.hpp"
+#include "command.hpp"
 
 using namespace std;
 
-namespace Command {
-const int ESC = 27;
-void send(int command);
 
-// Região crítica
-mutex semaphore;
-queue<int> commands;
-}  // namespace Command
+namespace Command {
+    const int ESC = 27;
+    void send(int command);
+
+    // Região crítica
+    mutex semaphore;
+    queue<int> commands;
+}
+
 
 void Command::send(int command) {
     // Adiciona o comando à fila
@@ -42,6 +41,7 @@ int Command::receive() {
     semaphore.unlock();
     return command;
 }
+
 
 void Command::listen() {
     while (Game::running()) {

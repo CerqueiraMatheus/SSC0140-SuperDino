@@ -1,24 +1,25 @@
-#include "game.hpp"
-
-#include <chrono>
 #include <mutex>
 #include <thread>
+#include <chrono>
 
+#include "game.hpp"
+#include "player.hpp"
 #include "command.hpp"
 #include "graphics.hpp"
-#include "player.hpp"
 
 using namespace std;
 using namespace chrono;
 
-namespace Game {
-const int FPS = 60;
-void update(Player& player);
 
-// Região crítica
-mutex semaphore;
-bool run = true;
-}  // namespace Game
+namespace Game {
+    const int FPS = 60;
+    void update(Player& player);
+
+    // Região crítica
+    mutex semaphore;
+    bool run = true;
+}
+
 
 bool Game::running() {
     // Checa pela execução do jogo
@@ -36,6 +37,7 @@ void Game::exit() {
     semaphore.unlock();
 }
 
+
 void Game::loop() {
     Player player;
     auto frame = system_clock::now();
@@ -45,7 +47,7 @@ void Game::loop() {
         frame += milliseconds(1000 / FPS);
 
         update(player);
-        Graphics::draw_player(player.x, player.y, '*');
+        Graphics::draw(player);
 
         // Espera até o próximo frame
         this_thread::sleep_until(frame);
