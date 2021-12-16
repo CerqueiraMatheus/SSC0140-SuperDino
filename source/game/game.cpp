@@ -6,13 +6,13 @@
 #include "player.hpp"
 #include "command.hpp"
 #include "graphics.hpp"
+#include "obstacle.hpp"
 
 using namespace std;
 using namespace chrono;
 
 
 namespace Game {
-    const int FPS = 60;
     void update(Player& player);
 
     // Região crítica
@@ -40,14 +40,16 @@ void Game::exit() {
 
 void Game::loop() {
     Player player;
+    Obstacles obstacles;
     auto frame = system_clock::now();
 
     while (running()) {
         // Calcula o próximo frame
-        frame += milliseconds(1000 / FPS);
+        frame += milliseconds(1000 / Graphics::FPS);
 
         update(player);
-        Graphics::draw(player);
+        obstacles.update();
+        Graphics::draw(player, obstacles);
 
         // Espera até o próximo frame
         this_thread::sleep_until(frame);

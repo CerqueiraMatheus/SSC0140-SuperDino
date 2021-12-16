@@ -4,6 +4,7 @@
 #include "game.hpp"
 #include "player.hpp"
 #include "graphics.hpp"
+#include "obstacle.hpp"
 
 using namespace std;
 
@@ -13,12 +14,13 @@ namespace Graphics {
 }
 
 
-void Graphics::draw(Player& player) {
+void Graphics::draw(Player& player, Obstacles& obstacles) {
     // Limpa a tela
     clear();
 
     background();
     player.draw();
+    obstacles.draw();
 
     // Atualiza a tela
     refresh();

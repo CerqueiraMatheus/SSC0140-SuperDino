@@ -70,7 +70,7 @@ void Player::draw() {
         mvprintw(y - 3, x, "        / \\_/)");
         mvprintw(y - 2, x, ",___.--` /"     );
         mvprintw(y - 1, x, " '-.__ )/'"     );
-        mvprintw(y    , x, "     / \\"      );
+        mvprintw(y,     x, "     / \\"      );
     }
 }
 

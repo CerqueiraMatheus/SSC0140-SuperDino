@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 
 class Player {
-   private:
+    private:
     float x;
     float y;
     int timer;
@@ -10,16 +10,16 @@ class Player {
     int height;
     float velocity;
 
-   private:
-    bool jumping();
-    bool ducking();
-
-   public:
+    public:
     Player();
     void move();
     void jump();
     void duck();
     void draw();
+
+    private:
+    bool jumping();
+    bool ducking();
 };
 
 #endif  // PLAYER_HPP

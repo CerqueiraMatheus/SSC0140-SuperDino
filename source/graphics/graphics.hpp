@@ -2,9 +2,12 @@
 #define GRAPHICS_HPP
 
 #include "player.hpp"
+#include "obstacle.hpp"
 
 namespace Graphics {
-    void draw(Player& player);
+    const int FPS = 60;
+
+    void draw(Player& player, Obstacles& obstacles);
 }
 
 #endif // GRAPHICS_HPP
