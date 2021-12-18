@@ -41,6 +41,8 @@ void Graphics::over() {
     mvprintw(height / 2 + 1, width / 2 - 27, " | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |       ");
     mvprintw(height / 2 + 2, width / 2 - 27, "  \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|  ");
 
+    mvprintw(height / 2 + 4, width / 2 - 13, "Press \"Space\" to play again");
+
     // Atualiza a tela
     refresh();
 }
