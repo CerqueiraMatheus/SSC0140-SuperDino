@@ -2,6 +2,7 @@
 #define OBSTACLE_HPP
 
 #include <deque>
+#include "player.hpp"
 
 class Obstacle {
     private:
@@ -15,6 +16,7 @@ class Obstacle {
     Obstacle();
     void move();
     void draw();
+    bool hits(Player &player);
 
     private:
     bool flying();
@@ -24,13 +26,14 @@ class Obstacle {
 
 class Obstacles {
     private:
-    int counter;
+    int cooldown;
     std::deque<Obstacle> obstacles;
 
     public:
     Obstacles();
     void draw();
     void update();
+    bool hits(Player &player);
 };
 
 #endif // OBSTACLE_HPP

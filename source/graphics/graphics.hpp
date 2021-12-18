@@ -8,6 +8,7 @@ namespace Graphics {
     const int FPS = 60;
 
     void draw(Player& player, Obstacles& obstacles);
+    void over();
 }
 
 #endif // GRAPHICS_HPP

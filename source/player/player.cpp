@@ -4,12 +4,14 @@
 #include "player.hpp"
 #include "graphics.hpp"
 
+using namespace std;
+
 
 Player::Player() {
     x = 15;
     y = Game::GROUND - 1;
 
-    width = 14;
+    width = 12;
     height = 5;
 
     timer = 0;
@@ -57,21 +59,29 @@ void Player::duck() {
 void Player::draw() {
     // Sprite abaixado
     if (ducking()) {
-        mvprintw(y - 3, x, "          __"   );
-        mvprintw(y - 2, x, ",___.---¨`o o"  );
-        mvprintw(y - 1, x, " '-.__ )_,\\_/)");
-        mvprintw(y    , x, "     / \\"      );
+        mvprintw(y - 3, x - 1, "          __   ");
+        mvprintw(y - 2, x - 1, ",___.---¨`o o  ");
+        mvprintw(y - 1, x - 1, " '-.__ )_,\\_/)");
+        mvprintw(y    , x - 1, "     / \\      ");
     }
 
     // Sprite de pé
     else {
-        mvprintw(y - 5, x, "          __"   );
-        mvprintw(y - 4, x, "         /o o"  );
-        mvprintw(y - 3, x, "        / \\_/)");
-        mvprintw(y - 2, x, ",___.--` /"     );
-        mvprintw(y - 1, x, " '-.__ )/'"     );
-        mvprintw(y,     x, "     / \\"      );
+        mvprintw(y - 5, x - 1, "          __   ");
+        mvprintw(y - 4, x - 1, "         /o o  ");
+        mvprintw(y - 3, x - 1, "        / \\_/)");
+        mvprintw(y - 2, x - 1, ",___.--` /     ");
+        mvprintw(y - 1, x - 1, " '-.__ )/'     ");
+        mvprintw(y,     x - 1, "     / \\      ");
     }
+}
+
+pair<int, int> Player::dimensions() {
+    return {width, height};
+}
+
+pair<float, float> Player::position() {
+    return {x, y};
 }
 
 

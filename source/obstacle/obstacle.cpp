@@ -2,17 +2,27 @@
 #include <ncurses.h>
 
 #include "game.hpp"
+#include "player.hpp"
 #include "obstacle.hpp"
+
+using namespace std;
 
 
 Obstacle::Obstacle() {
-    x = getmaxx(stdscr) - 15;
-    y = Game::GROUND - (rand() % 4 ? 1 : 5);
+    // Define se é um obstáculo de chão ou voador
+    if (rand() % 7 > 1) {
+        x = getmaxx(stdscr) - 10;
+        y = Game::GROUND - 1;
+    }
+    else {
+        x = getmaxx(stdscr) - 10;
+        y = Game::GROUND - 5;
+    }
 
-    width = 8;
+    width = 7;
     height = 5;
 
-    velocity = 1;
+    velocity = 1.3;
 }
 
 void Obstacle::move() {
@@ -31,13 +41,26 @@ void Obstacle::draw() {
 
     // Sprite no chão
     else {
-        mvprintw(y - 5, x, "    _ "    );
-        mvprintw(y - 4, x, " _ ( )   " );
-        mvprintw(y - 3, x, "( \\| | _" );
-        mvprintw(y - 2, x, " \\,. |/ )");
-        mvprintw(y - 1, x, "   |  /'"  );
-        mvprintw(y,     x, "   | |"    );
+        mvprintw(y - 5, x - 1, "    _     ");
+        mvprintw(y - 4, x - 1, " _ ( )    ");
+        mvprintw(y - 3, x - 1, "( \\| | _ ");
+        mvprintw(y - 2, x - 1, " \\,. |/ )");
+        mvprintw(y - 1, x - 1, "   |  /'  ");
+        mvprintw(y,     x - 1, "   | |    ");
     }
+}
+
+bool Obstacle::hits(Player& player) {
+    pair<int, int> dimensions = player.dimensions();
+    pair<float, float> position = player.position();
+
+    // Calcula a colisão retangular
+    return (
+        x < position.first  + dimensions.first  &&
+        y > position.second - dimensions.second &&
+        position.first  < x + width             &&
+        position.second > y - height
+    );
 }
 
 bool Obstacle::flying() {
@@ -46,7 +69,8 @@ bool Obstacle::flying() {
 
 
 Obstacles::Obstacles() {
-    counter = 0;
+    cooldown = 0;
+    srand(time(nullptr));
 }
 
 void Obstacles::draw() {
@@ -59,8 +83,9 @@ void Obstacles::update() {
     bool remove = false;
 
     // Adiciona um obstáculo
-    if (counter % 60 == 0) {
+    if (rand() % 75 == 0 && cooldown > 30) {
         obstacles.emplace_front();
+        cooldown = 0;
     }
 
     for (Obstacle& obstacle : obstacles) {
@@ -77,5 +102,15 @@ void Obstacles::update() {
         obstacles.pop_back();
     }
 
-    counter++;
+    cooldown++;
+}
+
+bool Obstacles::hits(Player& player) {
+    for (Obstacle& obstacle : obstacles) {
+        if (obstacle.hits(player)) {
+            return true;
+        }
+    }
+
+    return false;
 }

@@ -1,6 +1,8 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include <utility>
+
 class Player {
     private:
     float x;
@@ -16,6 +18,8 @@ class Player {
     void jump();
     void duck();
     void draw();
+    std::pair<int, int> dimensions();
+    std::pair<float, float> position();
 
     private:
     bool jumping();

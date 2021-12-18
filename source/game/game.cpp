@@ -1,6 +1,7 @@
 #include <mutex>
 #include <thread>
 #include <chrono>
+#include <utility>
 
 #include "game.hpp"
 #include "player.hpp"
@@ -13,7 +14,8 @@ using namespace chrono;
 
 
 namespace Game {
-    void update(Player& player);
+    bool update(Player& player, Obstacles& obstacles);
+    void over();
 
     // Região crítica
     mutex semaphore;
@@ -47,8 +49,18 @@ void Game::loop() {
         // Calcula o próximo frame
         frame += milliseconds(1000 / Graphics::FPS);
 
-        update(player);
-        obstacles.update();
+        // Termina o jogo se o player colidiu
+        if (update(player, obstacles) == false) {
+            over();
+
+            // Reseta os valores
+            player = Player();
+            obstacles = Obstacles();
+            frame = system_clock::now();
+
+            continue;
+        }
+
         Graphics::draw(player, obstacles);
 
         // Espera até o próximo frame
@@ -56,7 +68,7 @@ void Game::loop() {
     }
 }
 
-void Game::update(Player& player) {
+bool Game::update(Player& player, Obstacles& obstacles) {
     // Executa o comando
     switch (Command::receive()) {
         case Command::JUMP:
@@ -66,10 +78,22 @@ void Game::update(Player& player) {
         case Command::DUCK:
             player.duck();
             break;
-
-        case Command::RESET:
-            break;
     }
 
     player.move();
+    obstacles.update();
+
+    // Termina o jogo se o player colidiu
+    if (obstacles.hits(player)) {
+        return false;
+    }
+
+    return true;
+}
+
+void Game::over() {
+    Graphics::over();
+
+    // Aguarda até receber um comando RESET
+    while (running() && Command::receive() != Command::RESET);
 }
