@@ -39,7 +39,6 @@ void Game::exit() {
     semaphore.unlock();
 }
 
-
 void Game::loop() {
     Player player;
     Obstacles obstacles;
@@ -67,6 +66,7 @@ void Game::loop() {
         this_thread::sleep_until(frame);
     }
 }
+
 
 bool Game::update(Player& player, Obstacles& obstacles) {
     // Executa o comando

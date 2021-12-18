@@ -30,7 +30,16 @@ void Graphics::over() {
     // Limpa a tela
     clear();
 
-    mvprintw(0, 0, "Game over!");
+    int height, width;
+    getmaxyx(stdscr, height, width);
+
+    // Imprime a mensagem de game over
+    mvprintw(height / 2 - 3, width / 2 - 27, "   _____                         ____                      ");
+    mvprintw(height / 2 - 2, width / 2 - 27, "  / ____|                       / __ \\                    ");
+    mvprintw(height / 2 - 1, width / 2 - 27, " | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __      ");
+    mvprintw(height / 2,     width / 2 - 27, " | | |_ |/ _` | '_ ` _ \\ / _ \\ | |  | \\ \\ / / _ \\ '__|");
+    mvprintw(height / 2 + 1, width / 2 - 27, " | |__| | (_| | | | | | |  __/ | |__| |\\ V /  __/ |       ");
+    mvprintw(height / 2 + 2, width / 2 - 27, "  \\_____|\\__,_|_| |_| |_|\\___|  \\____/  \\_/ \\___|_|  ");
 
     // Atualiza a tela
     refresh();
