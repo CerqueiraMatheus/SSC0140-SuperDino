@@ -3,7 +3,7 @@
 
 namespace Game {
     const float GRAVITY = .1;
-    const int GROUND = 25;
+    const int GROUND = 20;
 
     bool running();
     void exit();

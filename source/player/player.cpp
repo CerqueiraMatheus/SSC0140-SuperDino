@@ -46,7 +46,7 @@ void Player::jump() {
 void Player::duck() {
     // Cai mais rápido se estiver no ar
     if (jumping()) {
-        velocity -= .9;
+        velocity -= .7;
     }
 
     // Abaixa se estiver no chão

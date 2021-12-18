@@ -13,14 +13,17 @@ Obstacle::Obstacle() {
     if (rand() % 7 > 1) {
         x = getmaxx(stdscr) - 10;
         y = Game::GROUND - 1;
+
+        width = 7;
+        height = 5;
     }
     else {
         x = getmaxx(stdscr) - 10;
         y = Game::GROUND - 5;
-    }
 
-    width = 7;
-    height = 5;
+        width = 10;
+        height = 3;
+    }
 
     velocity = 1.3;
 }
@@ -32,11 +35,9 @@ void Obstacle::move() {
 void Obstacle::draw() {
     // Sprite voador
     if (flying()) {
-        mvprintw(y - 4, x, "#########");
-        mvprintw(y - 3, x, "#########");
-        mvprintw(y - 2, x, "#########");
-        mvprintw(y - 1, x, "#########");
-        mvprintw(y,     x, "#########");
+        mvprintw(y - 2, x - 1, "   __,--._  ");
+        mvprintw(y - 1, x - 1, " ('       ) ");
+        mvprintw(y,     x - 1, "(___.___.__)");
     }
 
     // Sprite no chão
